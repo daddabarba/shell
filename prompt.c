@@ -6,7 +6,7 @@
 #include <zconf.h>
 
 void type_prompt(){
-    write(1, ">>", 2);
+    write(1, ">> ", 3);
 }
 
 void read_command(char *command, char** parameters){

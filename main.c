@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <zconf.h>
+#include <wait.h>
 
 #include "prompt.h"
 
@@ -6,6 +8,20 @@
 
 
 int main() {
-    type_prompt();
+
+    int status;
+    char *command, **parameters;
+
+    while(TRUE){
+        type_prompt();
+        read_command(command, parameters);
+
+        if(fork()!=0){
+            waitpid(-1, &status, 0);
+        }else{
+            execve(command, parameters, 0);
+        }
+    }
+
     return 0;
 }
