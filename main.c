@@ -1,6 +1,11 @@
-c#include <stdio.h>
+#include <stdio.h>
+
+#include "prompt.h"
+
+#define TRUE 1
+
 
 int main() {
-    printf("Hello, World!\n");
+    type_prompt();
     return 0;
 }

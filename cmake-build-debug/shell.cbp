@@ -78,7 +78,16 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/daddabarba/CLionProjects/shell/Defs.h">
+			<Option target="shell"/>
+		</Unit>
 		<Unit filename="/home/daddabarba/CLionProjects/shell/main.c">
+			<Option target="shell"/>
+		</Unit>
+		<Unit filename="/home/daddabarba/CLionProjects/shell/prompt.c">
+			<Option target="shell"/>
+		</Unit>
+		<Unit filename="/home/daddabarba/CLionProjects/shell/prompt.h">
 			<Option target="shell"/>
 		</Unit>
 		<Unit filename="/home/daddabarba/CLionProjects/shell/CMakeLists.txt">
