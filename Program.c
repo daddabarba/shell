@@ -22,29 +22,27 @@ void m_add_parameter(Program *this, char *parameter){
     }
 }
 
-void m_run(Program* this){
+void m_run_program(Program* this){
 
     int status;
 
-    if(fork() != 0) {
+    if(fork() != 0)
         waitpid(-1, &status, 0);
-        this->free_program(this);
-    } else {
+    else
         execvp(this->parameters[0], this->parameters);
-    }
 }
 
 Program* make_Program(size_t num_pars){
 
     Program* ptr = calloc(1, sizeof(Program));
 
+    ptr->run_program = &m_run_program;
+    ptr->add_parameter = &m_add_parameter;
+    ptr->free_program = &m_free_program;
+
     ptr->num_pars = 0;
     ptr->size_pars = num_pars;
     ptr->parameters = (char **)calloc(num_pars, sizeof(char *));
-
-    ptr->run = &m_run;
-    ptr->add_parameter = &m_add_parameter;
-    ptr->free_program = &m_free_program;
 
     return ptr;
 }

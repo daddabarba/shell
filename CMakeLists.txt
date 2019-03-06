@@ -8,6 +8,8 @@ set(SOURCES ${SOURCES}
         ./prompt.h
         ./Program.c
         ./Program.h
+        ./CommandList.c
+        ./CommandList.h
 )
 
 add_executable(shell main.c ${SOURCES})

@@ -66,6 +66,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/daddabarba/CLionProjects/shell/CommandList.c">
+			<Option target="shell"/>
+		</Unit>
+		<Unit filename="/home/daddabarba/CLionProjects/shell/CommandList.h">
+			<Option target="shell"/>
+		</Unit>
 		<Unit filename="/home/daddabarba/CLionProjects/shell/Program.c">
 			<Option target="shell"/>
 		</Unit>

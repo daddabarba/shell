@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/home/daddabarba/CLionProjects/shell/CommandList.c" "/home/daddabarba/CLionProjects/shell/CMakeFiles/shell.dir/CommandList.c.o"
   "/home/daddabarba/CLionProjects/shell/Program.c" "/home/daddabarba/CLionProjects/shell/CMakeFiles/shell.dir/Program.c.o"
   "/home/daddabarba/CLionProjects/shell/main.c" "/home/daddabarba/CLionProjects/shell/CMakeFiles/shell.dir/main.c.o"
   "/home/daddabarba/CLionProjects/shell/prompt.c" "/home/daddabarba/CLionProjects/shell/CMakeFiles/shell.dir/prompt.c.o"

@@ -2,28 +2,23 @@
 #include <zconf.h>
 
 #include "prompt.h"
+#include "CommandList.h"
 
 #define TRUE 1
 
 int main() {
 
-    size_t num_programs;
-    char *buffer; // command in prompt
-    struct Program **programs; // array of programs (pipeable) to be run
+    CommandList *cl;
 
-    while(TRUE) {
+    while(TRUE){
         type_prompt();
 
         // parse programs to run
-        num_programs = read_command(&buffer, &programs);
+        cl = make_CommandList();
 
         // run each program
-        for (size_t i = 0; i < num_programs; i++)
-            programs[i]->run(programs[i]);
-
-        // free buffer and programs before restarting
-        free(buffer);
-        free(programs);
+        cl->run_commandlist(cl);
+        cl->free_commandlist(cl);
     }
 
     return 0;

@@ -123,6 +123,33 @@ shell/fast:
 	$(MAKE) -f CMakeFiles/shell.dir/build.make CMakeFiles/shell.dir/build
 .PHONY : shell/fast
 
+CommandList.o: CommandList.c.o
+
+.PHONY : CommandList.o
+
+# target to build an object file
+CommandList.c.o:
+	$(MAKE) -f CMakeFiles/shell.dir/build.make CMakeFiles/shell.dir/CommandList.c.o
+.PHONY : CommandList.c.o
+
+CommandList.i: CommandList.c.i
+
+.PHONY : CommandList.i
+
+# target to preprocess a source file
+CommandList.c.i:
+	$(MAKE) -f CMakeFiles/shell.dir/build.make CMakeFiles/shell.dir/CommandList.c.i
+.PHONY : CommandList.c.i
+
+CommandList.s: CommandList.c.s
+
+.PHONY : CommandList.s
+
+# target to generate assembly for a file
+CommandList.c.s:
+	$(MAKE) -f CMakeFiles/shell.dir/build.make CMakeFiles/shell.dir/CommandList.c.s
+.PHONY : CommandList.c.s
+
 Program.o: Program.c.o
 
 .PHONY : Program.o
@@ -213,6 +240,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... shell"
 	@echo "... edit_cache"
+	@echo "... CommandList.o"
+	@echo "... CommandList.i"
+	@echo "... CommandList.s"
 	@echo "... Program.o"
 	@echo "... Program.i"
 	@echo "... Program.s"

@@ -12,7 +12,7 @@ typedef struct Program{
     size_t size_pars;
     char **parameters;
 
-    void (*run)(struct Program*);
+    void (*run_program)(struct Program*);
     void (*add_parameter)(struct Program*, char *parameter);
     void (*free_program)(struct Program*);
 }Program;

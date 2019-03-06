@@ -6,6 +6,12 @@
 
 #IncludeRegexTransform: 
 
+/home/daddabarba/CLionProjects/shell/CommandList.h
+stdlib.h
+-
+Program.h
+/home/daddabarba/CLionProjects/shell/Program.h
+
 /home/daddabarba/CLionProjects/shell/Program.h
 stdlib.h
 -
@@ -17,6 +23,8 @@ zconf.h
 -
 prompt.h
 /home/daddabarba/CLionProjects/shell/prompt.h
+CommandList.h
+/home/daddabarba/CLionProjects/shell/CommandList.h
 
 /home/daddabarba/CLionProjects/shell/prompt.h
 stdlib.h
