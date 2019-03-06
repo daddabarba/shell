@@ -1,14 +1,11 @@
 #include <stdio.h>
 #include <zconf.h>
-#include <wait.h>
 
 #include "prompt.h"
 
 #define TRUE 1
 
 int main() {
-
-    int status;
 
     size_t num_programs;
     char *buffer; // command in prompt
@@ -21,17 +18,8 @@ int main() {
         num_programs = read_command(&buffer, &programs);
 
         // run each program
-        for (size_t i = 0; i < num_programs; i++) {
-
-            if (fork() != 0) {
-                waitpid(-1, &status, 0); // serially run the programs one after the other
-                programs[i]->free_program(programs[i]); // free unused data
-            } else {
-                programs[i]->run(programs[i]);
-                break;
-            }
-
-        }
+        for (size_t i = 0; i < num_programs; i++)
+            programs[i]->run(programs[i]);
 
         // free buffer and programs before restarting
         free(buffer);

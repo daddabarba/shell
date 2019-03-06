@@ -5,6 +5,7 @@
 #include "Program.h"
 
 #include <zconf.h>
+#include <wait.h>
 
 void m_free_program(Program *this){
     free(this->parameters);
@@ -22,7 +23,15 @@ void m_add_parameter(Program *this, char *parameter){
 }
 
 void m_run(Program* this){
-    execvp(this->parameters[0], this->parameters);
+
+    int status;
+
+    if(fork() != 0) {
+        waitpid(-1, &status, 0);
+        this->free_program(this);
+    } else {
+        execvp(this->parameters[0], this->parameters);
+    }
 }
 
 Program* make_Program(size_t num_pars){

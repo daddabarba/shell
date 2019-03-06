@@ -15,8 +15,6 @@ stdio.h
 -
 zconf.h
 -
-wait.h
--
 prompt.h
 /home/daddabarba/CLionProjects/shell/prompt.h
 
