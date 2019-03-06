@@ -7,7 +7,12 @@
 
 #include <stdlib.h>
 
-void type_prompt();
-size_t read_command(char **command, char ***parameters);
+typedef struct Program{
+    size_t num_pars;
+    char **parameters;
+}Program;
+
+void type_prompt(); //print terminal's prompt
+size_t read_command(char **command, struct Program ***programs); //parse command (until \n) and split in instructions
 
 #endif //SHELL_PROMPT_H

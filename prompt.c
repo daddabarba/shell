@@ -12,49 +12,103 @@ void type_prompt(){
     write(1, ">> ", 3);
 }
 
-size_t read_word(char **string, char *last_char){
+size_t read_buffer(char **buffer){
+    // read the full stdin buffer (command) up to '\n'
+
     char cc;
+    size_t i=0, buffer_size = 20; // currect index in buffer and total buffer size
+    *buffer = (char *)calloc(sizeof(char), buffer_size); // allocate buffer
 
-    size_t i, word_size = 20;
-    *string = (char *)calloc(sizeof(char), word_size);
+    // read char by char
+    while((cc = (char)getchar()) > 0 && cc!='\n') {
 
-    for(i=0; (cc = (char)getchar()) > 0 && cc!=' ' && cc!='\n'; i++) {
-        (*string)[i] = cc;
+        // ignore spaces
+        if(cc != ' ') {
+            (*buffer)[i] = cc;
+            i++;
+        } else if(i==0 || (*buffer)[i-1]!='\0') { // first space means split of string (parameter)
+            (*buffer)[i] = '\0';
+            i++;
+        }
 
-        if(i == word_size-2){
-            word_size *= 2;
-            *string = realloc(*string, word_size);
+        // dynamically adjust buffer size
+        if(i == buffer_size-2){
+            buffer_size *= 2;
+            *buffer = realloc(*buffer, buffer_size);
         }
     }
 
-    *last_char = cc;
-    (*string)[i] = '\0';
+    // perfect fit of buffer
+    (*buffer)[i] = '\0';
+    *buffer = realloc(*buffer, i+1);
 
-    *string = realloc(*string, i+1);
+    // return final size
     return i;
 }
 
-size_t read_command(char **command, char ***parameters){
+unsigned short parse_program(size_t buffer_size, char *buffer, struct Program **program, size_t *index){
+    // parse the command for a single program in $PATH
 
-    size_t i=1, num_pars = 5;
-    char last_char;
-    *parameters = (char **)calloc(sizeof(char *), num_pars);
+    *program = (struct Program *)calloc(sizeof(struct Program), 1); // allocate pointer to program description
+    size_t tot_pars = 20, num_pars = 0; // size of parameters array and current number of parameters
 
-    read_word(command, &last_char);
-    (*parameters)[0] = *command;
+    // allocate array of pointer to parameters
+    (*program)->parameters = (char **)calloc(sizeof(char *), tot_pars);
 
-    while(last_char != '\n'){
+    // read the buffer (until the program part ends)
+    for(; (*index)<buffer_size; (*index)++) {
 
-        read_word(*parameters + i, &last_char);
+        // split parameter at end of string
+        if ((*index) == 0 || buffer[*index - 1] == '\0'){
 
-        if(i == num_pars-1){
-            num_pars *= 2;
-            *parameters = realloc(*parameters, num_pars);
+            // parameter just points to part of buffer array (save memory space)
+            (*program)->parameters[num_pars] = buffer+(*index);
+            num_pars++;
+
+            // dynamically adjust array size
+            if(num_pars == tot_pars-1){
+                tot_pars *= 2;
+                (*program)->parameters = (char **)realloc((*program)->parameters, tot_pars);
+            }
         }
-
-        i++;
     }
 
-    *parameters = realloc(*parameters, i);
+    // store number of parameters
+    (*program)->num_pars = num_pars;
+    (*program)->parameters = (char **)realloc((*program)->parameters, num_pars);
+
+    // return parsing status
+    if(num_pars>0)
+        return 1;
+
+    return 0;
+
+}
+
+size_t read_command(char **command, struct Program ***programs){
+    //parse command (until \n) and split in instructions
+
+    // current number of programs, programs array size, index in buffer, buffer size
+    size_t i=1, num_programs = 1, index = 0, buffer_size = read_buffer(command);
+
+    struct Program *next_program; // result of program parsing is stored here
+    *programs = (struct Program **)calloc(sizeof(struct Program *), num_programs); //allocate array of programs
+
+    // as long as there is a program to parse
+    while(parse_program(buffer_size, *command, &next_program, &index) > 0){
+
+        // store it
+        (*programs)[i] = next_program;
+        i++;
+
+        // dynamically adjust array size
+        if(i == num_programs-1){
+            num_programs *= 2;
+            *programs = (struct Program **)realloc(*programs, num_programs);
+        }
+    }
+
+    // perfect fit array size
+    *programs = (struct Program **)realloc(*programs, i);
     return i;
 }
