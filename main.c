@@ -10,17 +10,18 @@
 int main() {
 
     int status;
+    size_t num_pars;
     char *command, **parameters;
 
     while(TRUE){
         type_prompt();
-        read_command(&command, &parameters);
-
-        /*if(fork()!=0){
+        num_pars = read_command(&command, &parameters);
+        
+        if(fork()!=0){
             waitpid(-1, &status, 0);
         }else{
-            execve(command, parameters, 0);
-        }*/
+            execvp(command, parameters);
+        }
     }
 
     return 0;

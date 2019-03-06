@@ -36,11 +36,12 @@ size_t read_word(char **string, char *last_char){
 
 size_t read_command(char **command, char ***parameters){
 
-    size_t i=0, num_pars = 5;
+    size_t i=1, num_pars = 5;
     char last_char;
     *parameters = (char **)calloc(sizeof(char *), num_pars);
 
     read_word(command, &last_char);
+    (*parameters)[0] = *command;
 
     while(last_char != '\n'){
 
