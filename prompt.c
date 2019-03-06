@@ -52,9 +52,6 @@ unsigned short parse_program(size_t buffer_size, char *buffer, Program **program
     size_t tot_pars = 20, num_pars = 0; // size of parameters array and current number of parameters
     *program = make_Program(tot_pars);
 
-    // allocate array of pointer to parameters
-    (*program)->parameters = (char **)calloc(tot_pars, sizeof(char *));
-
     // read the buffer (until the program part ends)
     for(; (*index)<buffer_size; (*index)++) {
 
@@ -81,6 +78,7 @@ unsigned short parse_program(size_t buffer_size, char *buffer, Program **program
     if(num_pars>0)
         return 1;
 
+    (*program)->free_program(*program);
     return 0;
 
 }
