@@ -5,7 +5,9 @@
 #ifndef SHELL_PROMPT_H
 #define SHELL_PROMPT_H
 
+#include <stdlib.h>
+
 void type_prompt();
-void read_command(char *command, char** parameters);
+size_t read_command(char **command, char ***parameters);
 
 #endif //SHELL_PROMPT_H

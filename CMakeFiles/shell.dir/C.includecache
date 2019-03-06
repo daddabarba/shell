@@ -6,17 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/daddabarba/CLionProjects/shell/main.c
-stdio.h
--
-prompt.h
-/home/daddabarba/CLionProjects/shell/prompt.h
-
 /home/daddabarba/CLionProjects/shell/prompt.c
 prompt.h
 /home/daddabarba/CLionProjects/shell/prompt.h
+stdio.h
+-
 zconf.h
+-
+malloc.h
 -
 
 /home/daddabarba/CLionProjects/shell/prompt.h
+stdlib.h
+-
 
