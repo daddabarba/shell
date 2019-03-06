@@ -6,15 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/home/daddabarba/CLionProjects/shell/prompt.c
-prompt.h
-/home/daddabarba/CLionProjects/shell/prompt.h
+/home/daddabarba/CLionProjects/shell/main.c
 stdio.h
 -
 zconf.h
 -
-malloc.h
+wait.h
 -
+prompt.h
+/home/daddabarba/CLionProjects/shell/prompt.h
 
 /home/daddabarba/CLionProjects/shell/prompt.h
 stdlib.h
