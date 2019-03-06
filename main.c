@@ -14,29 +14,29 @@ int main() {
     char *buffer; // command in prompt
     struct Program **programs; // array of programs (pipeable) to be run
 
+    while(TRUE) {
+        type_prompt();
 
-    type_prompt();
+        // parse programs to run
+        num_programs = read_command(&buffer, &programs);
 
-    // parse programs to run
-    num_programs = read_command(&buffer, &programs);
+        // run each program
+        for (size_t i = 0; i < num_programs; i++) {
 
-    // run each program
-    for (size_t i = 0; i < num_programs; i++){
+            if (fork() != 0) {
+                waitpid(-1, &status, 0); // serially run the programs one after the other
+                programs[i]->free_program(programs[i]); // free unused data
+            } else {
+                programs[i]->run(programs[i]);
+                break;
+            }
 
-        if (fork() != 0) {
-            waitpid(-1, &status, 0); // serially run the programs one after the other
-            programs[i]->free_program(programs[i]); // free unused data
-        } else {
-            programs[i]->run(programs[i]);
-            break;
         }
 
+        // free buffer and programs before restarting
+        free(buffer);
+        free(programs);
     }
-
-    // free buffer and programs before restarting
-    free(buffer);
-    free(programs);
-
 
     return 0;
 }
