@@ -25,9 +25,9 @@ int main() {
 
         if (fork() != 0) {
             waitpid(-1, &status, 0); // serially run the programs one after the other
-            free(programs[i]); // free unused data
+            programs[i]->free_program(programs[i]); // free unused data
         } else {
-            execvp(programs[i]->parameters[0], programs[i]->parameters);
+            programs[i]->run(programs[i]);
             break;
         }
 

@@ -1,1 +1,1 @@
-/usr/bin/cc    CMakeFiles/shell.dir/main.c.o CMakeFiles/shell.dir/prompt.c.o  -o shell 
+/usr/bin/cc -g   CMakeFiles/shell.dir/main.c.o CMakeFiles/shell.dir/prompt.c.o CMakeFiles/shell.dir/Program.c.o  -o shell 

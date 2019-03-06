@@ -50,10 +50,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/bin/cmake
+CMAKE_COMMAND = /home/daddabarba/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/183.5429.37/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/bin/cmake -E remove -f
+RM = /home/daddabarba/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/183.5429.37/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -71,7 +71,7 @@ CMAKE_BINARY_DIR = /home/daddabarba/CLionProjects/shell
 CMakeFiles/shell.dir/all:
 	$(MAKE) -f CMakeFiles/shell.dir/build.make CMakeFiles/shell.dir/depend
 	$(MAKE) -f CMakeFiles/shell.dir/build.make CMakeFiles/shell.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/daddabarba/CLionProjects/shell/CMakeFiles --progress-num=1,2,3 "Built target shell"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/daddabarba/CLionProjects/shell/CMakeFiles --progress-num=1,2,3,4 "Built target shell"
 .PHONY : CMakeFiles/shell.dir/all
 
 # Include target in all.
@@ -81,7 +81,7 @@ all: CMakeFiles/shell.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/shell.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/daddabarba/CLionProjects/shell/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/daddabarba/CLionProjects/shell/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/shell.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/daddabarba/CLionProjects/shell/CMakeFiles 0
 .PHONY : CMakeFiles/shell.dir/rule

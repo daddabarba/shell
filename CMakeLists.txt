@@ -6,6 +6,8 @@ set(CMAKE_C_STANDARD 11)
 set(SOURCES ${SOURCES}
         ./prompt.c
         ./prompt.h
+        ./Program.c
+        ./Program.h
 )
 
 add_executable(shell main.c ${SOURCES})

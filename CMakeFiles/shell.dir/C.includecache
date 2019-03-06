@@ -6,6 +6,16 @@
 
 #IncludeRegexTransform: 
 
+/home/daddabarba/CLionProjects/shell/Program.c
+Program.h
+/home/daddabarba/CLionProjects/shell/Program.h
+zconf.h
+-
+
+/home/daddabarba/CLionProjects/shell/Program.h
+stdlib.h
+-
+
 /home/daddabarba/CLionProjects/shell/main.c
 stdio.h
 -
@@ -16,7 +26,19 @@ wait.h
 prompt.h
 /home/daddabarba/CLionProjects/shell/prompt.h
 
+/home/daddabarba/CLionProjects/shell/prompt.c
+prompt.h
+/home/daddabarba/CLionProjects/shell/prompt.h
+stdio.h
+-
+zconf.h
+-
+malloc.h
+-
+
 /home/daddabarba/CLionProjects/shell/prompt.h
 stdlib.h
 -
+Program.h
+/home/daddabarba/CLionProjects/shell/Program.h
 

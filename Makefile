@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/bin/cmake
+CMAKE_COMMAND = /home/daddabarba/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/183.5429.37/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/bin/cmake -E remove -f
+RM = /home/daddabarba/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/183.5429.37/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/daddabarba/CLionProjects/shell
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/daddabarba/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/183.5429.37/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/local/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/home/daddabarba/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/183.5429.37/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -122,6 +122,33 @@ shell: cmake_check_build_system
 shell/fast:
 	$(MAKE) -f CMakeFiles/shell.dir/build.make CMakeFiles/shell.dir/build
 .PHONY : shell/fast
+
+Program.o: Program.c.o
+
+.PHONY : Program.o
+
+# target to build an object file
+Program.c.o:
+	$(MAKE) -f CMakeFiles/shell.dir/build.make CMakeFiles/shell.dir/Program.c.o
+.PHONY : Program.c.o
+
+Program.i: Program.c.i
+
+.PHONY : Program.i
+
+# target to preprocess a source file
+Program.c.i:
+	$(MAKE) -f CMakeFiles/shell.dir/build.make CMakeFiles/shell.dir/Program.c.i
+.PHONY : Program.c.i
+
+Program.s: Program.c.s
+
+.PHONY : Program.s
+
+# target to generate assembly for a file
+Program.c.s:
+	$(MAKE) -f CMakeFiles/shell.dir/build.make CMakeFiles/shell.dir/Program.c.s
+.PHONY : Program.c.s
 
 main.o: main.c.o
 
@@ -186,6 +213,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... shell"
 	@echo "... edit_cache"
+	@echo "... Program.o"
+	@echo "... Program.i"
+	@echo "... Program.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
