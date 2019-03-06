@@ -9,9 +9,11 @@
 
 typedef struct Program{
     size_t num_pars;
+    size_t size_pars;
     char **parameters;
 
     void (*run)(struct Program*);
+    void (*add_parameter)(struct Program*, char *parameter);
     void (*free_program)(struct Program*);
 }Program;
 

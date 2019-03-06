@@ -6,12 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/daddabarba/CLionProjects/shell/Program.c
-Program.h
-/home/daddabarba/CLionProjects/shell/Program.h
-zconf.h
--
-
 /home/daddabarba/CLionProjects/shell/Program.h
 stdlib.h
 -

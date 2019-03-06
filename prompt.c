@@ -49,34 +49,21 @@ size_t read_buffer(char **buffer){
 unsigned short parse_program(size_t buffer_size, char *buffer, Program **program, size_t *index){
     // parse the command for a single program in $PATH
 
-    size_t tot_pars = 20, num_pars = 0; // size of parameters array and current number of parameters
+    size_t tot_pars = 20; // size of parameters array and current number of parameters
     *program = make_Program(tot_pars);
 
     // read the buffer (until the program part ends)
-    for(; (*index)<buffer_size; (*index)++) {
-
+    for(; (*index)<buffer_size; (*index)++)
         // split parameter at end of string
-        if ((*index) == 0 || buffer[*index - 1] == '\0'){
-
+        if ((*index) == 0 || buffer[*index - 1] == '\0')
             // parameter just points to part of buffer array (save memory space)
-            (*program)->parameters[num_pars] = buffer+(*index);
-            num_pars++;
-
-            // dynamically adjust array size
-            if(num_pars == tot_pars-1){
-                tot_pars *= 2;
-                (*program)->parameters = (char **)realloc((*program)->parameters, tot_pars* sizeof(char *));
-            }
-        }
-    }
-
-    // store number of parameters
-    (*program)->num_pars = num_pars;
-    (*program)->parameters = (char **)realloc((*program)->parameters, (num_pars+1)*sizeof(char *));
+            (*program)->add_parameter(*program, buffer+(*index));
 
     // return parsing status
-    if(num_pars>0)
+    if((*program)->num_pars>0) {
+        (*program)->parameters = (char **)realloc((*program)->parameters, ((*program)->num_pars+1)*sizeof(char *));
         return 1;
+    }
 
     (*program)->free_program(*program);
     return 0;
