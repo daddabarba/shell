@@ -17,7 +17,7 @@ size_t read_buffer(char **buffer){
 
     char cc;
     size_t i=0, buffer_size = 20; // currect index in buffer and total buffer size
-    *buffer = (char *)calloc(sizeof(char), buffer_size); // allocate buffer
+    *buffer = (char *)calloc(buffer_size, sizeof(char)); // allocate buffer
 
     // read char by char
     while((cc = (char)getchar()) > 0 && cc!='\n') {
@@ -34,26 +34,26 @@ size_t read_buffer(char **buffer){
         // dynamically adjust buffer size
         if(i == buffer_size-2){
             buffer_size *= 2;
-            *buffer = realloc(*buffer, buffer_size);
+            *buffer = realloc(*buffer, buffer_size*sizeof(char));
         }
     }
 
     // perfect fit of buffer
     (*buffer)[i] = '\0';
-    *buffer = realloc(*buffer, i+1);
+    *buffer = realloc(*buffer, (i+1)* sizeof(char));
 
     // return final size
     return i;
 }
 
-unsigned short parse_program(size_t buffer_size, char *buffer, struct Program **program, size_t *index){
+unsigned short parse_program(size_t buffer_size, char *buffer, Program **program, size_t *index){
     // parse the command for a single program in $PATH
 
-    *program = (struct Program *)calloc(sizeof(struct Program), 1); // allocate pointer to program description
+    *program = (Program *)calloc(1, sizeof(Program)); // allocate pointer to program description
     size_t tot_pars = 20, num_pars = 0; // size of parameters array and current number of parameters
 
     // allocate array of pointer to parameters
-    (*program)->parameters = (char **)calloc(sizeof(char *), tot_pars);
+    (*program)->parameters = (char **)calloc(tot_pars, sizeof(char *));
 
     // read the buffer (until the program part ends)
     for(; (*index)<buffer_size; (*index)++) {
@@ -68,14 +68,14 @@ unsigned short parse_program(size_t buffer_size, char *buffer, struct Program **
             // dynamically adjust array size
             if(num_pars == tot_pars-1){
                 tot_pars *= 2;
-                (*program)->parameters = (char **)realloc((*program)->parameters, tot_pars);
+                (*program)->parameters = (char **)realloc((*program)->parameters, tot_pars* sizeof(char *));
             }
         }
     }
 
     // store number of parameters
     (*program)->num_pars = num_pars;
-    (*program)->parameters = (char **)realloc((*program)->parameters, num_pars);
+    (*program)->parameters = (char **)realloc((*program)->parameters, (num_pars+1)*sizeof(char *));
 
     // return parsing status
     if(num_pars>0)
@@ -85,14 +85,14 @@ unsigned short parse_program(size_t buffer_size, char *buffer, struct Program **
 
 }
 
-size_t read_command(char **command, struct Program ***programs){
+size_t read_command(char **command, Program ***programs){
     //parse command (until \n) and split in instructions
 
     // current number of programs, programs array size, index in buffer, buffer size
-    size_t i=1, num_programs = 1, index = 0, buffer_size = read_buffer(command);
+    size_t i=0, num_programs = 2, index = 0, buffer_size = read_buffer(command);
 
-    struct Program *next_program; // result of program parsing is stored here
-    *programs = (struct Program **)calloc(sizeof(struct Program *), num_programs); //allocate array of programs
+    Program *next_program; // result of program parsing is stored here
+    *programs = (Program **)calloc(num_programs, sizeof(Program *)); //allocate array of programs
 
     // as long as there is a program to parse
     while(parse_program(buffer_size, *command, &next_program, &index) > 0){
@@ -104,11 +104,11 @@ size_t read_command(char **command, struct Program ***programs){
         // dynamically adjust array size
         if(i == num_programs-1){
             num_programs *= 2;
-            *programs = (struct Program **)realloc(*programs, num_programs);
+            *programs = (Program **)realloc(*programs, num_programs* sizeof(Program));
         }
     }
 
     // perfect fit array size
-    *programs = (struct Program **)realloc(*programs, i);
+    *programs = (Program **)realloc(*programs, i*sizeof(Program));
     return i;
 }

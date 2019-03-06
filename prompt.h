@@ -13,6 +13,6 @@ typedef struct Program{
 }Program;
 
 void type_prompt(); //print terminal's prompt
-size_t read_command(char **command, struct Program ***programs); //parse command (until \n) and split in instructions
+size_t read_command(char **command, Program ***programs); //parse command (until \n) and split in instructions
 
 #endif //SHELL_PROMPT_H
