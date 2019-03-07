@@ -4,6 +4,7 @@
 
 #include "CommandList.h"
 
+#include <zconf.h>
 #include <stdio.h>
 #include <memory.h>
 #include <fcntl.h>
@@ -88,6 +89,12 @@ void m_free_commandlist(CommandList* this){
     for (size_t i = 0; i < this->num_programs; i++)
         this->programs[i]->free_program(this->programs[i]);
 
+    if(this->in_fd!=0)
+        close(this->in_fd);
+
+    if(this->out_fd!=1)
+        close(this->out_fd);
+
     free(this->buffer);
     free(this->programs);
     free(this);
@@ -139,6 +146,7 @@ int get_fd(char *buffer, size_t buffer_size, char symbol){
         }else if(symbol == '>'){
             fd = open(name, O_WRONLY | O_CREAT, S_IWUSR);
         }
+
         free(name);
 
         return fd;
@@ -188,15 +196,18 @@ CommandList* make_CommandList(){
         // Error invalid syntax
     }
 
-    ptr->in_fd = fd_in;
-    ptr->out_fd = fd_out;
+    if(fd_in>0)
+        ptr->in_fd = fd_in;
+
+    if(fd_out>0)
+        ptr->out_fd = fd_out;
 
     // perfect fit array size
     ptr->programs = (Program **)realloc(ptr->programs, i*sizeof(Program));
     ptr->num_programs = i;
 
-    ptr->programs[i - 1]->pipe[0] = fd_out;
-    ptr->programs[i - 1]->pipe[1] = fd_out;
+    ptr->programs[i - 1]->pipe[0] = ptr->out_fd;
+    ptr->programs[i - 1]->pipe[1] = ptr->out_fd;
 
     return ptr;
 }

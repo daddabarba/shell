@@ -46,11 +46,10 @@ int m_run_program(Program* this, int in) {
         return this->pipe[0];
     }else{
 
-        if(this->piped) {
+        if(this->piped)
             close(this->pipe[0]);
-            dup2(this->pipe[1], 1); // write in pipe (or stdout by default)
-        }
 
+        dup2(this->pipe[1], 1); // write in pipe (or stdout by default)
         dup2(in, 0);
 
         execvp(this->parameters[0], this->parameters);
