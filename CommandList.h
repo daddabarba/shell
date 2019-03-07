@@ -12,6 +12,8 @@ typedef struct CommandList {
 
     size_t num_programs;
     char *buffer;
+    int in_fd;
+    int out_fd;
     Program **programs;
 
     void (*run_commandlist)(struct CommandList*);
