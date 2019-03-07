@@ -6,29 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/daddabarba/CLionProjects/shell/CommandList.h
-stdlib.h
--
+/home/daddabarba/CLionProjects/shell/Program.c
 Program.h
 /home/daddabarba/CLionProjects/shell/Program.h
-
-/home/daddabarba/CLionProjects/shell/Program.h
-stdlib.h
--
-
-/home/daddabarba/CLionProjects/shell/main.c
-stdio.h
--
 zconf.h
 -
-prompt.h
-/home/daddabarba/CLionProjects/shell/prompt.h
-CommandList.h
-/home/daddabarba/CLionProjects/shell/CommandList.h
+wait.h
+-
+stdio.h
+-
 
-/home/daddabarba/CLionProjects/shell/prompt.h
+/home/daddabarba/CLionProjects/shell/Program.h
 stdlib.h
 -
-Program.h
-/home/daddabarba/CLionProjects/shell/Program.h
 

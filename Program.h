@@ -12,8 +12,12 @@ typedef struct Program{
     size_t size_pars;
     char **parameters;
 
-    void (*run_program)(struct Program*);
+    int pipe[2];
+    unsigned short piped;
+
+    int (*run_program)(struct Program*, int in);
     void (*add_parameter)(struct Program*, char *parameter);
+    int (*set_pipe)(struct Program*);
     void (*free_program)(struct Program*);
 }Program;
 

@@ -47,11 +47,15 @@ unsigned short parse_program(size_t buffer_size, char *buffer, Program **program
     *program = make_Program(tot_pars);
 
     // read the buffer (until the program part ends)
-    for(; (*index)<buffer_size; (*index)++)
+    for(; (*index)<buffer_size && buffer[*index]!='|'; (*index)++)
         // split parameter at end of string
         if ((*index) == 0 || buffer[*index - 1] == '\0')
             // parameter just points to part of buffer array (save memory space)
             (*program)->add_parameter(*program, buffer+(*index));
+
+
+    if(buffer[*index]=='|')
+        *index += 2;
 
     // return parsing status
     if((*program)->num_pars>0) {
@@ -65,8 +69,11 @@ unsigned short parse_program(size_t buffer_size, char *buffer, Program **program
 }
 
 void m_run_commandlist(CommandList* this){
+
+    int in = 0; // first program in pipe gets input from stdin
+
     for (size_t i = 0; i < this->num_programs; i++)
-        this->programs[i]->run_program(this->programs[i]);
+        in = this->programs[i]->run_program(this->programs[i], in);
 }
 
 void m_free_commandlist(CommandList* this){
@@ -98,6 +105,10 @@ CommandList* make_CommandList(){
 
         // store it
         (ptr->programs)[i] = next_program;
+
+        if(i>0)
+            (ptr->programs)[i-1]->set_pipe((ptr->programs)[i-1]);
+
         i++;
 
         // dynamically adjust array size
