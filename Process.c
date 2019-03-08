@@ -49,11 +49,13 @@ void m_run_processes(Process*this) {
 
 void m_free_process(Process* this){
 
-    for(size_t i=0; i<this->num_processes; i++)
-        this->commandLists[i]->free_commandlist(this->commandLists[i]);
+    if(this->num_processes==1) {
+        for (size_t i = 0; i < this->num_processes; i++)
+            this->commandLists[i]->free_commandlist(this->commandLists[i]);
+        free(this->commandLists);
+    }
 
     free(this->buffer);
-    free(this->commandLists);
     free(this);
 }
 
