@@ -100,11 +100,11 @@ void m_free_commandlist(CommandList* this){
     free(this);
 }
 
-int get_fd(char *buffer, size_t buffer_size, char symbol, int start_index){
+int get_fd(char *buffer, size_t buffer_size, char symbol, int *start_index){
     int char_at_index = -1;
 
     // read char by char
-    for(int i = start_index; i < buffer_size; i++) {
+    for(int i = *start_index; i < buffer_size; i++) {
 
         if(buffer[i] == symbol){
             char_at_index = i + 2;
@@ -159,8 +159,8 @@ CommandList* make_CommandList(){
         }
     }
 
-    int fd_out = get_fd(ptr->buffer, buffer_size, '>', index);
-    int fd_in = get_fd(ptr->buffer, buffer_size, '<', index);
+    int fd_out = get_fd(ptr->buffer, buffer_size, '>', (int *)&index);
+    int fd_in = get_fd(ptr->buffer, buffer_size, '<', (int *)&index);
 
     if(fd_in>0)
         ptr->in_fd = fd_in;
