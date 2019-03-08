@@ -15,12 +15,17 @@ size_t read_buffer(char **buffer){
     char cc;
     size_t i=0, buffer_size = 20; // currect index in buffer and total buffer size
     *buffer = (char *)calloc(buffer_size, sizeof(char)); // allocate buffer
+    short in_string = 0;
 
     // read char by char
     while((cc = (char)getchar()) > 0 && cc!='\n') {
 
         // ignore spaces
-        if(cc != ' ') {
+        
+        if(cc == '\"')
+            in_string = !in_string;
+
+        if(cc != ' ' || in_string) {
             (*buffer)[i] = cc;
             i++;
         } else if(i==0 || (*buffer)[i-1]!='\0') { // first space means split of string (parameter)
