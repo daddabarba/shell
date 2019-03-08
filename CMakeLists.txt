@@ -10,6 +10,8 @@ set(SOURCES ${SOURCES}
         ./Program.h
         ./CommandList.c
         ./CommandList.h
+        ./Process.c
+        ./Program.h
 )
 
 add_executable(shell main.c ${SOURCES})

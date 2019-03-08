@@ -3,21 +3,19 @@
 #include <memory.h>
 
 #include "prompt.h"
-#include "CommandList.h"
+#include "Process.h"
 
 #define TRUE 1
 
 int main() {
 
-    CommandList *cl;
-
-    int a = 5;
+    Process *cl;
 
     while(TRUE){
         type_prompt();
 
         // parse programs to run
-        cl = make_CommandList();
+        cl = parse_Process();
 
         // Might have to check for still running processes
         if(!strcmp(cl->buffer, "exit")){
@@ -25,8 +23,8 @@ int main() {
         }
 
         // run each program
-        cl->run_commandlist(cl);
-        cl->free_commandlist(cl);
+        cl->run_processes(cl);
+        cl->free_processes(cl);
     }
 
     return 0;

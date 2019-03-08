@@ -11,7 +11,6 @@
 typedef struct CommandList {
 
     size_t num_programs;
-    char *buffer;
     int in_fd;
     int out_fd;
     Program **programs;
@@ -22,5 +21,6 @@ typedef struct CommandList {
 }CommandList;
 
 CommandList* make_CommandList();
+int parse_commandlist(size_t buffer_size, char *buffer, CommandList **ptr, size_t *index);
 
 #endif //SHELL_COMMANDLIST_H
