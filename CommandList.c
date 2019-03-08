@@ -100,59 +100,30 @@ void m_free_commandlist(CommandList* this){
     free(this);
 }
 
-int get_fd(char *buffer, size_t buffer_size, char symbol){
-    char c;
-    size_t index = 0, size = 20;
-    char *name = (char *)calloc(size, sizeof(char));
-
-    int matched = 0;
+int get_fd(char *buffer, size_t buffer_size, char symbol, int start_index){
+    int char_at_index = -1;
 
     // read char by char
-    for(int i = 0; i < buffer_size; i++) {
+    for(int i = start_index; i < buffer_size; i++) {
 
-        if(matched == 0 && buffer[i] == symbol){
-            matched = 1;
-            continue;
-        }
-
-        if(matched) {
-            if (buffer[i] == ' ' || buffer[i] == '\0') {
-                continue;
-            } else if (buffer[i] == '\n' || ((buffer[i] == '>' || buffer[i] == '<') && buffer[i] != symbol)) {
-                break;
-            } else if(buffer[i] == symbol) {
-                return -1; // error cannot have two > or < example ls > in > out
-            }else {
-                name[index] = buffer[i];
-                index++;
-            }
-
-            // dynamically adjust buffer size
-            if (index == size - 2) {
-                size *= 2;
-                name = realloc(name, size * sizeof(char));
-            }
+        if(buffer[i] == symbol){
+            char_at_index = i + 2;
+            break;
         }
     }
 
-    // perfect fit of buffer
-    name[index] = '\0';
-    name = realloc(name, (index + 1)* sizeof(char));
-
-    if(matched){
+    if(char_at_index != -1){
         int fd;
         if(symbol == '<'){
-            fd = open(name, O_RDONLY);
+            fd = open(&buffer[char_at_index], O_RDONLY);
         }else if(symbol == '>'){
-            fd = open(name, O_WRONLY | O_CREAT, S_IWUSR);
+            fd = open(&buffer[char_at_index], O_WRONLY | O_CREAT, S_IWUSR);
         }
-
-        free(name);
 
         return fd;
     }
 
-    return 0;
+    return symbol == '<' ? 0 : 1;
 }
 
 CommandList* make_CommandList(){
@@ -188,13 +159,8 @@ CommandList* make_CommandList(){
         }
     }
 
-    int fd_out = get_fd(ptr->buffer, buffer_size, '>');
-    int fd_in = get_fd(ptr->buffer, buffer_size, '<');
-
-    if(fd_in == -1 || fd_out == -1){
-        // TODO
-        // Error invalid syntax
-    }
+    int fd_out = get_fd(ptr->buffer, buffer_size, '>', index);
+    int fd_in = get_fd(ptr->buffer, buffer_size, '<', index);
 
     if(fd_in>0)
         ptr->in_fd = fd_in;
