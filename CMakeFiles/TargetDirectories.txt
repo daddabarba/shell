@@ -1,3 +1,0 @@
-/home/daddabarba/CLionProjects/shell/CMakeFiles/rebuild_cache.dir
-/home/daddabarba/CLionProjects/shell/CMakeFiles/shell.dir
-/home/daddabarba/CLionProjects/shell/CMakeFiles/edit_cache.dir

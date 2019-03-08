@@ -3,3 +3,7 @@ cmake-build-debug/*
 shell
 CMakeCache.txt
 CMakeFiles/*
+a*
+b*
+c*
+*.txt
