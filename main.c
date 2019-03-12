@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <zconf.h>
 #include <memory.h>
+#include <wait.h>
 
 #include "prompt.h"
 #include "Process.h"
@@ -17,9 +18,16 @@ int main() {
         // parse programs to run
         cl = parse_Process();
 
+        int status;
         // Might have to check for still running processes
         if(!strcmp(cl->buffer, "exit")){
-            break;
+            if(waitpid(-1, &status, WNOHANG) == 0){
+                printf("There are still background processes running!\n");
+                continue;
+            }
+            else {
+                break;
+            }
         }
 
         // run each program
