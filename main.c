@@ -15,6 +15,14 @@ int main() {
         // parse programs to run
         cl = parse_Process();
 
+        if((*cl->commandLists)->error_code == 1){
+            printf("Error: input and output files cannot be equal!\n");
+            continue;
+        } else if((*cl->commandLists)->error_code == 2){
+            printf("Invalid syntax!\n");
+            continue;
+        }
+
         int status;
         // Might have to check for still running processes
         if(!strcmp(cl->buffer, "exit")){
@@ -29,6 +37,7 @@ int main() {
 
         // run each program
         cl->run_processes(cl);
+
         cl->free_processes(cl);
     }
 

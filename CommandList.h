@@ -14,6 +14,7 @@ typedef struct CommandList {
     int in_fd;
     int out_fd;
     Program **programs;
+    int error_code;
 
     void (*run_commandlist)(struct CommandList*);
     void (*free_commandlist)(struct CommandList*);

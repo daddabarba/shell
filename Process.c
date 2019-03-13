@@ -36,7 +36,6 @@ void m_run_processes(Process*this) {
             } else {
 
                 this->commandLists[i]->run_commandlist(this->commandLists[i]);
-
                 exit(0);
             }
         }
