@@ -13,7 +13,7 @@ void m_add_command_list(Process *this, CommandList *new){
     this->commandLists[this->num_processes] = new;
     this->num_processes++;
 
-    if(this->num_processes == this->size_commandlists-1){
+    if(this->num_processes == this->size_commandlists){
         this->size_commandlists*=2;
         this->commandLists = realloc(this->commandLists, this->size_commandlists*sizeof(CommandList*));
     }
