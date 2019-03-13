@@ -4,8 +4,6 @@ project(shell C)
 set(CMAKE_C_STANDARD 11)
 
 set(SOURCES ${SOURCES}
-        ./prompt.c
-        ./prompt.h
         ./Program.c
         ./Program.h
         ./CommandList.c

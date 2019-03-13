@@ -1,9 +1,7 @@
 #include <stdio.h>
-#include <zconf.h>
 #include <memory.h>
 #include <wait.h>
 
-#include "prompt.h"
 #include "Process.h"
 
 #define TRUE 1
@@ -13,7 +11,6 @@ int main() {
     Process *cl;
 
     while(TRUE){
-        type_prompt();
 
         // parse programs to run
         cl = parse_Process();

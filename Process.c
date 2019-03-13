@@ -22,39 +22,36 @@ void m_add_command_list(Process *this, CommandList *new){
 
 void m_run_processes(Process*this) {
 
-    if (this->num_processes == 1){
-        this->commandLists[0]->run_commandlist(this->commandLists[0]);
-    }else {
-        for (size_t i = 0; i < this->num_processes; i++){
+    for (size_t i = 0; i < (this->num_processes -1); i++){
 
-            if(fork() == 0) {
-                if (fork() != 0) {
+        if(fork() == 0) {
+            if (fork() != 0) {
 
-                    int status;
-                    waitpid(-1, &status, 0);
+                int status;
+                waitpid(-1, &status, 0);
 
-                    this->commandLists[i]->free_commandlist(this->commandLists[i]);
+                this->commandLists[i]->free_commandlist(this->commandLists[i]);
 
-                    exit(0);
-                } else {
+                exit(0);
+            } else {
 
-                    this->commandLists[i]->run_commandlist(this->commandLists[i]);
+                this->commandLists[i]->run_commandlist(this->commandLists[i]);
 
-                    exit(0);
-                }
+                exit(0);
             }
         }
     }
+
+    this->commandLists[this->num_processes -1]->run_commandlist(this->commandLists[this->num_processes -1]);
 }
 
 void m_free_process(Process* this){
 
-    if(this->num_processes==1) {
-        for (size_t i = 0; i < this->num_processes; i++)
-            this->commandLists[i]->free_commandlist(this->commandLists[i]);
-        free(this->commandLists);
-    }
 
+    this->commandLists[this->num_processes -1]->free_commandlist(this->commandLists[this->num_processes -1]);
+
+
+    free(this->commandLists);
     free(this->buffer);
     free(this);
 }

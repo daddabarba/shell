@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/clion-2018.3.4/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /usr/local/bin/cmake
 
 # The command to remove a file.
-RM = /opt/clion-2018.3.4/bin/cmake/linux/bin/cmake -E remove -f
+RM = /usr/local/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell"
+CMAKE_SOURCE_DIR = /home/daddabarba/Desktop/shell
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell"
+CMAKE_BINARY_DIR = /home/daddabarba/Desktop/shell
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = "/media/ivan/085848A55848937C/Groningen University/Third Year
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/opt/clion-2018.3.4/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/opt/clion-2018.3.4/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/usr/local/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell/CMakeFiles" "/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell/CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/daddabarba/Desktop/shell/CMakeFiles /home/daddabarba/Desktop/shell/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/daddabarba/Desktop/shell/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -231,33 +231,6 @@ main.c.s:
 	$(MAKE) -f CMakeFiles/shell.dir/build.make CMakeFiles/shell.dir/main.c.s
 .PHONY : main.c.s
 
-prompt.o: prompt.c.o
-
-.PHONY : prompt.o
-
-# target to build an object file
-prompt.c.o:
-	$(MAKE) -f CMakeFiles/shell.dir/build.make CMakeFiles/shell.dir/prompt.c.o
-.PHONY : prompt.c.o
-
-prompt.i: prompt.c.i
-
-.PHONY : prompt.i
-
-# target to preprocess a source file
-prompt.c.i:
-	$(MAKE) -f CMakeFiles/shell.dir/build.make CMakeFiles/shell.dir/prompt.c.i
-.PHONY : prompt.c.i
-
-prompt.s: prompt.c.s
-
-.PHONY : prompt.s
-
-# target to generate assembly for a file
-prompt.c.s:
-	$(MAKE) -f CMakeFiles/shell.dir/build.make CMakeFiles/shell.dir/prompt.c.s
-.PHONY : prompt.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -265,8 +238,8 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... shell"
 	@echo "... edit_cache"
+	@echo "... shell"
 	@echo "... CommandList.o"
 	@echo "... CommandList.i"
 	@echo "... CommandList.s"
@@ -279,9 +252,6 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... prompt.o"
-	@echo "... prompt.i"
-	@echo "... prompt.s"
 .PHONY : help
 
 

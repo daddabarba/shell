@@ -8,104 +8,96 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell"/>
+				<Option working_dir="/home/daddabarba/Desktop/shell"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell"/>
+				<Option working_dir="/home/daddabarba/Desktop/shell"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="shell">
-				<Option output="/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell/shell" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 shell"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="shell/fast">
-				<Option output="/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell/shell" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 shell/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell"/>
+				<Option working_dir="/home/daddabarba/Desktop/shell"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/media/ivan/085848A55848937C/Groningen\ University/Third\ Year/Operating\ Systems/shell/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="shell">
+				<Option output="/home/daddabarba/Desktop/shell/shell" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/daddabarba/Desktop/shell"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 shell"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="shell/fast">
+				<Option output="/home/daddabarba/Desktop/shell/shell" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/daddabarba/Desktop/shell"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 shell/fast"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/daddabarba/Desktop/shell/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell/CommandList.c">
+		<Unit filename="/home/daddabarba/Desktop/shell/CommandList.c">
 			<Option target="shell"/>
 		</Unit>
-		<Unit filename="/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell/CommandList.h">
+		<Unit filename="/home/daddabarba/Desktop/shell/CommandList.h">
 			<Option target="shell"/>
 		</Unit>
-		<Unit filename="/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell/Process.c">
+		<Unit filename="/home/daddabarba/Desktop/shell/Process.c">
 			<Option target="shell"/>
 		</Unit>
-		<Unit filename="/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell/Process.h">
+		<Unit filename="/home/daddabarba/Desktop/shell/Process.h">
 			<Option target="shell"/>
 		</Unit>
-		<Unit filename="/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell/Program.c">
+		<Unit filename="/home/daddabarba/Desktop/shell/Program.c">
 			<Option target="shell"/>
 		</Unit>
-		<Unit filename="/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell/Program.h">
+		<Unit filename="/home/daddabarba/Desktop/shell/Program.h">
 			<Option target="shell"/>
 		</Unit>
-		<Unit filename="/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell/main.c">
+		<Unit filename="/home/daddabarba/Desktop/shell/main.c">
 			<Option target="shell"/>
 		</Unit>
-		<Unit filename="/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell/prompt.c">
-			<Option target="shell"/>
-		</Unit>
-		<Unit filename="/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell/prompt.h">
-			<Option target="shell"/>
-		</Unit>
-		<Unit filename="/media/ivan/085848A55848937C/Groningen University/Third Year/Operating Systems/shell/CMakeLists.txt">
+		<Unit filename="/home/daddabarba/Desktop/shell/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

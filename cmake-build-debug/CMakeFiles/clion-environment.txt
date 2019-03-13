@@ -1,3 +1,2 @@
-ToolSet: 1.0 (local)Options: 
-
-Options:
+Options: 
+CMake: 3.8.2@/opt/clion-2017.2.2/bin/cmake/bin/cmake
