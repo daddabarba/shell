@@ -178,11 +178,13 @@ Process* parse_Process(){
 
     while(index<buffer_size) {
 
+        if((ptr->buffer)[index] == '&') { // skip this character
+            (index) +=2;
+            continue;
+        }
+
         if(!parse_commandlist(buffer_size, ptr->buffer, &new_commandlist, &index))
             break;
-
-        if((ptr->buffer)[index] == '&') // skip this character
-            continue;
 
         ptr->add_commandlist(ptr, new_commandlist);
     }
