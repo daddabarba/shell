@@ -32,38 +32,24 @@ void m_free_commandlist(CommandList* this){
     free(this);
 }
 
-int get_fd(char *buffer, char symbol, int index){
+void m_add_program(CommandList* this, Program* p){
 
-    if(index != -1){
-        int fd;
-        if(symbol == '<'){
-            fd = open(&buffer[index], O_RDONLY);
-        }else if(symbol == '>'){
-            fd = open(&buffer[index], O_WRONLY | O_CREAT, S_IWUSR);
-        }
+    (this->programs)[this->num_programs] = p;
 
-        return fd;
+    // If more than one program, pipe the previous one with the following
+    if(this->num_programs>0)
+        (this->programs)[this->num_programs-1]->set_pipe((this->programs)[this->num_programs-1]);
+
+    this->num_programs++;
+
+    if( this->num_programs >= (this->size_programs-1) ){
+        this->size_programs *=2;
+        this->programs = (Program**)realloc(this->programs, this->size_programs*sizeof(Program*));
     }
 
-    return symbol == '<' ? 0 : 1;
 }
 
-int get_index_file(char *buffer, size_t buffer_size, char symbol, int *start_index){
-    int char_at_index = -1;
-
-    // read char by char
-    for(int i = *start_index; i < buffer_size && buffer[i]!='&'; i++) {
-
-        if(buffer[i] == symbol){
-            char_at_index = i + 2;
-            break;
-        }
-    }
-
-    return char_at_index;
-}
-
-CommandList* make_CommandList(){
+CommandList* make_CommandList(size_t num_programs){
     //parse command (until \n) and split in instructions
 
     CommandList* ptr = calloc(1, sizeof(CommandList));
@@ -72,74 +58,14 @@ CommandList* make_CommandList(){
 
     ptr->run_commandlist = &m_run_commandlist;
     ptr->free_commandlist = &m_free_commandlist;
+    ptr->add_program = &m_add_program;
+
+    ptr->num_programs = 0;
+    ptr->size_programs = num_programs;
+
+    ptr->error_code = 0;
+
+    ptr->programs = (Program **)calloc(num_programs, sizeof(Program *)); //allocate array of programs
 
     return ptr;
-}
-
-int parse_commandlist(size_t buffer_size, char* buffer, CommandList **ptr, size_t *index){
-
-    *ptr = make_CommandList();
-
-    // current number of programs, programs array size, index in buffer, buffer size
-    size_t i=0, num_programs = 1;
-    (*ptr)->programs = (Program **)calloc(num_programs, sizeof(Program *)); //allocate array of programs
-
-    Program *next_program; // result of program parsing is stored here
-
-    // as long as there is a program to parse
-    while(buffer[*index]!= '&' && parse_program(buffer_size, buffer, &next_program, index) > 0){
-        // store it
-        ((*ptr)->programs)[i] = next_program;
-
-        if(i>0)
-            ((*ptr)->programs)[i-1]->set_pipe(((*ptr)->programs)[i-1]);
-
-        i++;
-
-        // dynamically adjust array size
-        if(i == num_programs-1){
-            num_programs *= 2;
-            ((*ptr)->programs) = (Program **)realloc((*ptr)->programs, num_programs* sizeof(Program));
-        }
-    }
-
-    if(i<1) {
-        (*ptr)->free_commandlist(*ptr);
-        return 0;
-    }
-
-    int out_index = get_index_file(buffer, buffer_size, '>', (int*)index);
-    int in_index = get_index_file(buffer, buffer_size, '<', (int*)index);
-
-    if(out_index != -1 && in_index != -1 && strcmp(buffer + out_index + 2, buffer + in_index + 2) == 0){
-        (*ptr)->error_code = 1;
-        return 1;
-    }
-
-    int fd_out = get_fd(buffer, '>', out_index);
-    int fd_in = get_fd(buffer, '<', in_index);
-
-    while(*index < buffer_size && buffer[*index]!='&')
-        (*index)++;
-
-    if(*index < buffer_size)
-        (*index)+=2;
-
-    if(fd_in >= 0 && fd_out >= 0){
-        (*ptr)->in_fd = fd_in;
-        (*ptr)->out_fd = fd_out;
-    } else {
-        (*ptr)->error_code = 2;
-        return 1;
-    }
-    // perfect fit array size
-    (*ptr)->programs = (Program **)realloc((*ptr)->programs, i*sizeof(Program));
-    (*ptr)->num_programs = i;
-
-    (*ptr)->programs[i - 1]->pipe[0] = (*ptr)->out_fd;
-    (*ptr)->programs[i - 1]->pipe[1] = (*ptr)->out_fd;
-
-    (*ptr)->error_code = 0;
-
-    return 1;
 }

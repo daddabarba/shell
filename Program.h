@@ -23,6 +23,5 @@ typedef struct Program{
 
 
 Program* make_Program(size_t num_pars);
-unsigned short parse_program(size_t buffer_size, char *buffer, Program **program, size_t *index);
 
 #endif //SHELL_PROGRAM_H

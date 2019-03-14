@@ -84,36 +84,3 @@ Program* make_Program(size_t num_pars){
 
     return ptr;
 }
-
-unsigned short parse_program(size_t buffer_size, char *buffer, Program **program, size_t *index){
-    // parse the command for a single program in $PATH
-
-    size_t tot_pars = 20; // size of parameters array and current number of parameters
-    *program = make_Program(tot_pars);
-
-    // read the buffer (until the program part ends)
-    for(; (*index)<buffer_size && buffer[*index]!='|'; (*index)++) {
-
-        if(buffer[*index] == '<' || buffer[*index] == '>' || buffer[*index] == '&'){
-            break;
-        }
-
-        // split parameter at end of string
-        if ((*index) == 0 || buffer[*index - 1] == '\0')
-            // parameter just points to part of buffer array (save memory space)
-            (*program)->add_parameter(*program, buffer + (*index));
-    }
-
-    if(buffer[*index]=='|')
-        *index += 2;
-
-    // return parsing status
-    if((*program)->num_pars>0) {
-        (*program)->parameters = (char **)realloc((*program)->parameters, ((*program)->num_pars+1)*sizeof(char *));
-        return 1;
-    }
-
-    (*program)->free_program(*program);
-    return 0;
-
-}

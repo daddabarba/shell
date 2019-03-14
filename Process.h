@@ -20,7 +20,6 @@ typedef struct Process{
 
 }Process;
 
-Process* make_Process();
-Process* parse_Process();
+Process* make_Process(size_t num_commandlists);
 
 #endif //SHELL_PROCESS_H

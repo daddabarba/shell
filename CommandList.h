@@ -10,7 +10,7 @@
 
 typedef struct CommandList {
 
-    size_t num_programs;
+    size_t num_programs, size_programs;
     int in_fd;
     int out_fd;
     Program **programs;
@@ -18,10 +18,10 @@ typedef struct CommandList {
 
     void (*run_commandlist)(struct CommandList*);
     void (*free_commandlist)(struct CommandList*);
+    void (*add_program)(struct CommandList*, Program*);
 
 }CommandList;
 
-CommandList* make_CommandList();
-int parse_commandlist(size_t buffer_size, char *buffer, CommandList **ptr, size_t *index);
+CommandList* make_CommandList(size_t num_programs);
 
 #endif //SHELL_COMMANDLIST_H
