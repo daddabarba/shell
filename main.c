@@ -8,6 +8,8 @@
 
 int main() {
 
+    setbuf(stdout, NULL);
+
     Process *cl;
 
     while(TRUE){
