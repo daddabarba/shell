@@ -4,7 +4,7 @@
 
 #include "Program.h"
 
-#include <zconf.h>
+#include <unistd.h>
 #include <wait.h>
 #include <stdio.h>
 

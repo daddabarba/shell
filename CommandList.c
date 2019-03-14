@@ -4,8 +4,8 @@
 
 #include "CommandList.h"
 
-#include <zconf.h>
-#include <stdio.h>
+
+#include <unistd.h>
 #include <memory.h>
 #include <fcntl.h>
 
