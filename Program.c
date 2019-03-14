@@ -52,7 +52,11 @@ int m_run_program(Program* this, int in) {
         dup2(this->pipe[1], 1); // write in pipe (or stdout by default)
         dup2(in, 0);
 
-        execvp(this->parameters[0], this->parameters);
+        int result = 1;
+        result = execvp(this->parameters[0], this->parameters);
+        if(result == -1){
+            printf("Error: command not found!\n");
+        }
 
         if(this->piped)
             close(this->pipe[1]);
