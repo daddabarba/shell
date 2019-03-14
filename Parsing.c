@@ -98,8 +98,11 @@ int parse_commandlist(size_t buffer_size, char* buffer, CommandList **ptr, size_
         // Stop characters for program
         if(buffer[*index] == '<' || buffer[*index] == '>' || buffer[*index] == '&')
             break;
-        else if(buffer[*index] == '|') //skip this characters
+
+        if(buffer[*index] == '|') { //skip this characters
+            (*index) += 2;
             continue;
+        }
 
         if(!parse_program(buffer_size, buffer, &next_program, index))
             break;
@@ -185,8 +188,6 @@ Process* parse_Process(){
     }
 
     ptr->commandLists = (CommandList**)realloc(ptr->commandLists, ptr->num_processes*sizeof(CommandList*));
-
-    
 
     return ptr;
 }
