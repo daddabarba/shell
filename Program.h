@@ -15,7 +15,7 @@ typedef struct Program{
     int pipe[2];
     unsigned short piped;
 
-    void (*run_program)(struct Program*, int in);
+    int (*run_program)(struct Program*, int in);
     void (*add_parameter)(struct Program*, char *parameter);
     int (*set_pipe)(struct Program*);
     void (*free_program)(struct Program*);

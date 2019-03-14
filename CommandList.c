@@ -14,7 +14,7 @@ void m_run_commandlist(CommandList* this){
     int in = this->in_fd; // first program in pipe gets input from stdin
 
     for (size_t i = 0; i < this->num_programs; i++)
-        this->programs[i]->run_program(this->programs[i], in);
+        in = this->programs[i]->run_program(this->programs[i], in);
 }
 
 void m_free_commandlist(CommandList* this){
