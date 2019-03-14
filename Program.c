@@ -60,6 +60,8 @@ int m_run_program(Program* this, int in) {
 
         if(this->piped)
             close(this->pipe[1]);
+
+        exit(0);
     }
 }
 
