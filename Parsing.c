@@ -142,8 +142,8 @@ int parse_commandlist(size_t buffer_size, char* buffer, CommandList **ptr, size_
 
         if(buffer[*index]=='<'){
 
-            if(file_in != NULL){
-                (*ptr)->error_code = 1;
+            if(file_in != NULL || (*index+2)>=buffer_size){
+                (*ptr)->error_code = 2;
                 return 1;
             }
 
@@ -152,8 +152,8 @@ int parse_commandlist(size_t buffer_size, char* buffer, CommandList **ptr, size_
 
         if(buffer[*index]=='>'){
 
-            if(file_out != NULL){
-                (*ptr)->error_code = 1;
+            if(file_out != NULL || (*index+2)>=buffer_size){
+                (*ptr)->error_code = 2;
                 return 1;
             }
 
