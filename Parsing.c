@@ -28,15 +28,31 @@ size_t read_buffer(char **buffer){
             in_string = !in_string;
 
         if(cc != ' ' || in_string) {
-            (*buffer)[i] = cc;
-            i++;
+            // pad < or > with \0
+            if(cc == '<' || cc == '>'){
+                //check if \0 wasnt added already
+                if((*buffer)[i-1] != '\0'){
+                    (*buffer)[i] = '\0';
+                    i++;
+                }
+
+                // add symbol
+                (*buffer)[i] = cc;
+                i++;
+
+                (*buffer)[i] = '\0';
+                i++;
+            } else {
+                (*buffer)[i] = cc;
+                i++;
+            }
         } else if(i==0 || (*buffer)[i-1]!='\0') { // first space means split of string (parameter)
             (*buffer)[i] = '\0';
             i++;
         }
 
         // dynamically adjust buffer size
-        if(i == buffer_size-2){
+        if(i == buffer_size-4){
             buffer_size *= 2;
             *buffer = realloc(*buffer, buffer_size*sizeof(char));
         }
