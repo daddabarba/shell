@@ -25,10 +25,11 @@ void m_run_processes(Process*this) {
     for (size_t i = 0; i < (this->num_processes -1); i++){
 
         if(fork() == 0) {
-            if (fork() != 0) {
+            int child_pid;
+            if ((child_pid = fork()) != 0) {
 
                 int status;
-                waitpid(-1, &status, 0);
+                waitpid(child_pid, &status, 0);
 
                 this->commandLists[i]->free_commandlist(this->commandLists[i]);
 

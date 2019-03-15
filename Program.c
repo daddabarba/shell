@@ -39,10 +39,10 @@ void m_add_parameter(Program *this, char *parameter){
 
 int m_run_program(Program* this, int in) {
 
-    int status;
+    int status, child_pid;
 
-    if (fork() != 0){
-        waitpid(-1, &status, 0);
+    if ((child_pid = fork()) != 0){
+        waitpid(child_pid, &status, 0);
         return this->pipe[0];
     }else{
 
