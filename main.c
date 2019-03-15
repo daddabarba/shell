@@ -19,15 +19,20 @@ int main() {
 
         if((*cl->commandLists)->error_code == 1){
             printf("Error: input and output files cannot be equal!\n");
+            cl->free_processes(cl);
             continue;
         } else if((*cl->commandLists)->error_code == 2){
             printf("Invalid syntax!\n");
+            cl->free_processes(cl);
             continue;
         }
 
         int status;
         // Might have to check for still running processes
         if(!strcmp(cl->buffer, "exit")){
+
+            cl->free_processes(cl);
+
             if(waitpid(-1, &status, WNOHANG) == 0){
                 printf("There are still background processes running!\n");
                 continue;
