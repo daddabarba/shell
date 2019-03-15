@@ -17,6 +17,11 @@ int main() {
         // parse programs to run
         cl = parse_Process();
 
+        if(strlen(cl->buffer) == 0) {
+            cl->free_processes;
+            continue;
+        }
+
         if((*cl->commandLists)->error_code == 1){
             printf("Error: input and output files cannot be equal!\n");
             cl->free_processes(cl);
