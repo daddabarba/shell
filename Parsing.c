@@ -83,7 +83,11 @@ unsigned short parse_program(size_t buffer_size, char *buffer, Program **program
     for(; (*index)<buffer_size; skip_word(buffer_size, buffer, index)) {
 
         // Stop characters for program
-        if(buffer[*index] == '<' || buffer[*index] == '>' || buffer[*index] == '&' || buffer[*index]=='|')
+        if( buffer[*index +1] == '\0'
+            && (buffer[*index] == '<'
+                || buffer[*index] == '>'
+                || buffer[*index] == '&'
+                || buffer[*index]=='|'))
             break;
 
         // parameter just points to part of buffer array (save memory space)
@@ -114,7 +118,10 @@ int parse_commandlist(size_t buffer_size, char* buffer, CommandList **ptr, size_
     while((*index)<buffer_size) {
 
         // Stop characters for program
-        if(buffer[*index] == '<' || buffer[*index] == '>' || buffer[*index] == '&')
+        if(buffer[*index + 1] == '\0'
+            && (buffer[*index] == '<'
+                || buffer[*index] == '>'
+                || buffer[*index] == '&'))
             break;
 
         if(buffer[*index] == '|') { //skip this characters
@@ -142,7 +149,7 @@ int parse_commandlist(size_t buffer_size, char* buffer, CommandList **ptr, size_
         if(buffer[*index]!='>' && buffer[*index]!='<')
             break;
 
-        if(buffer[*index]=='<'){
+        if(buffer[*index]=='<' && buffer[*index+1]=='\0'){
 
             if(file_in != NULL || (*index+2)>=buffer_size){
                 (*ptr)->error_code = 2;
@@ -152,7 +159,7 @@ int parse_commandlist(size_t buffer_size, char* buffer, CommandList **ptr, size_
             file_in = buffer + (*index +=2);
         }
 
-        if(buffer[*index]=='>'){
+        if(buffer[*index]=='>' && buffer[*index+1]=='\0'){
 
             if(file_out != NULL || (*index+2)>=buffer_size){
                 (*ptr)->error_code = 2;
