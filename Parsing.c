@@ -71,7 +71,7 @@ size_t read_buffer(char **buffer){
 void skip_word(size_t buffer_size, char *buffer, size_t *index){
     // skip to next buffer substring
     for(; (*index)<buffer_size && buffer[*index]!='\0'; (*index)++);
-    (*index)++; // start of next sub-string
+    for(; (*index)<buffer_size && buffer[*index]=='\0'; (*index)++); // start of next sub-string
 }
 
 unsigned short parse_program(size_t buffer_size, char *buffer, Program **program, size_t *index){
