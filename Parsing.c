@@ -29,7 +29,7 @@ size_t read_buffer(char **buffer){
 
         if(cc != ' ' || in_string) {
             // pad < or > with \0
-            if(cc == '<' || cc == '>'){
+            if((cc == '<' || cc == '>') && !in_string){
                 //check if \0 wasnt added already
                 if((*buffer)[i-1] != '\0'){
                     (*buffer)[i] = '\0';
@@ -52,7 +52,7 @@ size_t read_buffer(char **buffer){
         }
 
         // dynamically adjust buffer size
-        if(i == buffer_size-4){
+        if(i == buffer_size-5){
             buffer_size *= 2;
             *buffer = realloc(*buffer, buffer_size*sizeof(char));
         }
