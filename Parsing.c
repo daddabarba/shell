@@ -24,8 +24,10 @@ size_t read_buffer(char **buffer){
 
         // ignore spaces
 
-        if(cc == '\"')
+        if(cc == '\"') {
             in_string = !in_string;
+            continue;
+        }
 
         if(cc != ' ' || in_string) {
             // pad < or > with \0
