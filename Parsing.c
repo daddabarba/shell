@@ -20,7 +20,7 @@ size_t read_buffer(char **buffer){
     short in_string = 0;
 
     // read char by char
-    while((cc = (char)getchar()) > 0 && cc!='\n') {
+    while((cc = (char)getchar()) > 0 && (in_string || cc!='\n')) {
 
         // ignore spaces
 
