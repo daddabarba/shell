@@ -3,6 +3,7 @@
 #include <wait.h>
 
 #include "prompt.h"
+#include "builtInCommands.h"
 #include "Parsing.h"
 
 #define TRUE 1
@@ -48,6 +49,13 @@ int main() {
             else {
                 break;
             }
+        }else if(cl->num_processes==1
+            && cl->commandLists[0]->num_programs == 1
+            && cl->commandLists[0]->programs[0]->num_pars == 2
+            && !strcmp(cl->commandLists[0]->programs[0]->parameters[0], "cd")){
+
+            cdFunc(cl->commandLists[0]->programs[0]->parameters[1]);
+            continue;
         }
 
         // run each program
