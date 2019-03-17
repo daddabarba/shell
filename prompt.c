@@ -9,6 +9,15 @@
 #include <unistd.h>
 #include <wait.h>
 
+#define KNRM  "\x1B[0m"
+#define KRED  "\x1B[31m"
+#define KGRN  "\x1B[32m"
+#define KYEL  "\x1B[33m"
+#define KBLU  "\x1B[34m"
+#define KMAG  "\x1B[35m"
+#define KCYN  "\x1B[36m"
+#define KWHT  "\x1B[37m"
+
 int command_in_line(char *argv[]){
 
     int pipeFD[2], childPID, status;
@@ -62,8 +71,16 @@ int type_directory(){
 }
 
 void type_prompt(){
+
+    printf("%s", KGRN);
     type_username();
+    printf("%s", KNRM);
+
     putchar('@');
+
+    printf("%s", KBLU);
     type_directory();
+    printf("%s", KNRM);
+    
     printf("> ");
 }
