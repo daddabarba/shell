@@ -76,11 +76,11 @@ void type_prompt(){
     type_username();
     printf("%s", KNRM);
 
-    putchar('@');
+    putchar(':');
 
     printf("%s", KBLU);
     type_directory();
     printf("%s", KNRM);
-    
-    printf("> ");
+
+    printf("$ ");
 }
