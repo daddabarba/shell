@@ -9,12 +9,6 @@
 #include <stdio.h>
 
 void m_free_program(Program *this){
-
-    if(this->piped) {
-        close(this->pipe[0]);
-        close(this->pipe[1]);
-    }
-
     free(this->parameters);
     free(this);
 }
@@ -42,6 +36,13 @@ int m_run_program(Program* this, int in) {
     int status, child_pid;
 
     if ((child_pid = fork()) != 0){
+
+        if(this->piped)
+            close(this->pipe[1]);
+
+        if(in!=0)
+            close(in);
+
         waitpid(child_pid, &status, 0);
         return this->pipe[0];
     }else{
@@ -54,9 +55,9 @@ int m_run_program(Program* this, int in) {
 
         int result = 1;
         result = execvp(this->parameters[0], this->parameters);
-        if(result == -1){
+
+        if(result == -1)
             printf("Error: command not found!\n");
-        }
 
         if(this->piped)
             close(this->pipe[1]);
