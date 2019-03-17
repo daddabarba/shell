@@ -1,21 +1,46 @@
 The input command of an user in a shell-type program can be quite complex, so in order to simplify the process it can be broken down into several steps each represented by the correspoding .c and .h file.
 
-The Process header file contains a structure which hold the input given by the user in a parsed buffer form, the number of processes and all the various commands to be executed along with their corresponding parameters.
+The Process header file contains a structure which holds the input given by the user in a parsed buffer form, the number of processes and all the various commands to be executed along with their corresponding parameters.
 
-The CommandList header file similarly contains a strucuture to hold he number of programs to be executed, FDs for input and output which might be different from the standard input/output ones, a series of programs to be executed and a field for a any potential error code.
+The CommandList header file similarly contains a strucuture to hold he number of programs to be executed, FDs for input and output which might be different from the standard input/output ones (in case of I/O redirection), a series of programs to be executed in a pipe, together with a field for a any potential error code.
 
-The Program header file contains a strucutre to hold the number of parameters per command to be executed, along with an array with the corresponding paramters. Additionally, the structure Program also contains a set of pipes in the event that the input/output is being piped from/to another program.
+The Program header file contains a strucutre to hold the number of parameters per command to be executed, along with an array with the corresponding paramters. Additionally, the structure Program also contains a pipes (for the next program that pipes it) and can receive an input fd from where to read, in the event that the input/output is being piped from/to another program.
 
 A Process can contain one or more CommandLists, which in turn can contain one or more Programs. Each of the described structures is used in a class-like fashion where each strucutre contains functions to change the above described fields. A Process has functions to run/free a process and to add new CommandLists. A CommandList can run/free a commandList and can add a program to its set of programs. A Program can run/free a program, add a parameter to a program and set the pipes for a given program.
 
 This sort of abstraction of the process at different levels allows for better control over each of the steps. A Program is only concerned with running a given command with its parameters and controls only such behavior, while a CommandList has a set of Programs to run and controls the input/output behavior of said set etc.
 
+== PARSING ==
+
 The parsing of a single input line from the user at all the different levels is handled by Parsing.c.
+
+First the input is parsed as a buffer. To do this we store the entire input in a char array (up to the \n, unless there has been an opening quote which is not closed yet). This is what we call the buffer. When reading char by char, we split the user's input in words, that is we put a \0 character for each first space (multiple spaces are skipped). The reason why we put a \0 is that this way we can store everything in the buffer itself. If a Program struct has an argument, it simply stores a pointer to the first char of the argument (word). The \0 will ensure that the system will see that as a string ending at the \0 itself. For instance if the user inputs "hello there", the buffer will be "hello\0there\0", while the argument "there" is store by the pointer buffer + 6.
+
+To parse string, we simply keep track weather we are in a string or not (every time we meet a double quote character, we invert a boolean indicating that). If we are inside a string, no character is skipped, not even spaces. For the buffer a string is a single word (with a \0 only at the end of the string).
+
+As previously mentioned, alll string must be closed, if a \n is encountered while we are inside a string, the prompt waits for additional user input.
 
 == I/O REDIRECTION ==
 
 With the above described structure it is easy to see how the input/ouput redirection can be handled. The I/O behavior is handled by CommandList, as it has two fields named in_fd and out_fd for inputs and outputs accordingly. Once the input line from the user has been read it can be searched for the symbols signifying I/O redirection namely '<' and '>'. If either of the two symbols (or both of them) are detected the file name after the correspodning symbol is used to obtain the FD of said file. If no file name an error is thrown. Once the FD(s) have been obtained simply the fields in_fd and out_fd need to be set to the obtained value. If no I/O redirection symbols are detected in_fd and out_fd remain unchainged as their default falues are 0 (stdin) and 1 (stdout) accordingly.
 
+== PIPING ==
+
+Piping is performed by a CommandList. The CommandList runs the programs given (in pipe) one after the other. The first Program, when run, reads its input from the in_fd of the CommandList (either stdin or an input file). Then, if is more than one process piped, the current process writes its output in a pipe, and returns the reading file of the pipe once it has done running. This fd is then given as input fd to the next Program. This is repeated until the last program, whose output is writte in out_fd (either stdout or an output file).
+
 == BACKGROUND PROCESSES ==
 
-With the described structure the way background processes are implemented is the following: if the '&' symbol is detected the parent spawns a child, that child in turn spawns another child which executed the command. In order to prevent the blocking of the parent the wait() is used with the parameter WNOHANG, which means the shell remains open for new commands. The reason behind implementing background processes in such a manner and spawning a child which spawns a child is that once the command has been executed some cleaning up has to be done. That is memory needs to be freed once the execution of the command has terminated. That is done by the first child which is decoupled from the parent, leading to the running-in-the-background behavior. 
+With the described structure the way background processes are implemented is the following: if the '&' symbol is detected the parent spawns a child (A), that child in turn spawns another child (B) which executes the command (which is actually an entire CommandList). The original child (A) will instead wait for the second one (B) to finish running, once this is done, it will free the memory nedded to execute the CommandList. 
+The reason behind implementing background processes in such a manner and spawning a child which spawns a child is that once the command has been executed some cleaning up has to be done, while the main process can't wait for the background one to be done. That is memory needs to be freed once the execution of the command has terminated. That is done by the first child which is decoupled from the parent, leading to the running-in-the-background behavior.
+
+In the main, we use wait to check if children are still running (once exit is called). In order to prevent the blocking of the parent the wait() is used with the parameter WNOHANG, which means the shell remains open for new commands. 
+
+== EXTENSION ==
+
+We added a few extensions to this shell.
+
+The first one is that of having a prompt, before the user types the next command. This prompt displays the current user's name (this is done by running with a syscall the command "whoami" and printing its output), and the current directory (again we simply run the command "pwd").
+
+Then we also added some colors. We simply use some linux color codes. We print them when we want the next thing to be printed to be of a certain color, and then we reset to default text color. In this case we have a different color for the username and for the current path in the prompt.
+
+Finally we implemented a built in command: cd. This is done by simply checking if cd <path> is typed by the user. If this is the case, instead of running the command normally (using exec), we call a built in function. This first computes the directory path (if the path given is relative, we attach to it the current wd, then a forward slash character, and then the given path). Then we call the chdir function (from unistd.h) which performs the system call.
