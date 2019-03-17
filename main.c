@@ -3,7 +3,7 @@
 #include <wait.h>
 
 #include "prompt.h"
-#include "builtInCommands.h"
+#include "builtInCommand.h"
 #include "Parsing.h"
 
 #define TRUE 1
