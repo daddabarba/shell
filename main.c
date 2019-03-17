@@ -55,6 +55,7 @@ int main() {
             && !strcmp(cl->commandLists[0]->programs[0]->parameters[0], "cd")){
 
             cdFunc(cl->commandLists[0]->programs[0]->parameters[1]);
+            cl->free_processes(cl);
             continue;
         }
 
